@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "snmp-netwatch"
+version = "1.0.0"
+description = "Zero-dependency SNMPv2c network monitor with a built-in agent simulator, interface rate computation, SQLite history, threshold alerting and a self-contained HTML dashboard."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Jeremy da Costa", email = "357285436+jeremydacosta-TechOptimist@users.noreply.github.com" },
+]
+keywords = ["snmp", "snmpv2c", "network-monitoring", "ber", "mib", "sqlite", "dashboard", "observability"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Environment :: Console",
+  "Topic :: System :: Networking",
+  "Topic :: System :: Systems Administration",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+netwatch = "netwatch.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/jeremydacosta-TechOptimist/snmp-netwatch"
+Issues = "https://github.com/jeremydacosta-TechOptimist/snmp-netwatch/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
