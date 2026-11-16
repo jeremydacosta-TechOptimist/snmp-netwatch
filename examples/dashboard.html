@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="30">
+<title>netwatch dashboard</title>
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 24px;
+  background: #0b1220; color: #dbe4f0;
+  font: 14px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+header { margin-bottom: 20px; }
+h1 { margin: 0; font-size: 24px; letter-spacing: 0.02em; color: #f8fbff; }
+h2 { margin: 0 0 10px; font-size: 16px; color: #9fb3cc; text-transform: uppercase; letter-spacing: 0.08em; }
+p.subtitle { margin: 2px 0 0; color: #8da2bd; }
+p.meta { margin: 8px 0 0; color: #8da2bd; font-size: 13px; }
+section { background: #111c30; border: 1px solid #22334d; border-radius: 8px; padding: 16px; margin-bottom: 18px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #1d2c44; white-space: nowrap; }
+th { color: #94a9c4; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #16253d; }
+td.num, th.num { text-align: right; }
+.ok { color: #5bd6a2; font-weight: 600; }
+.bad { color: #ff7b7b; font-weight: 600; }
+.warn { color: #ffc266; font-weight: 600; }
+.muted { color: #6f829c; }
+.empty { margin: 0; color: #8da2bd; }
+code { background: #1b2b45; border-radius: 4px; padding: 1px 5px; color: #cfe0f5; }
+.spark { display: block; }
+.spark-axis { stroke: #2a3d5c; stroke-width: 1; }
+.spark-in { fill: none; stroke: #54a6ff; stroke-width: 1.6; stroke-linejoin: round; }
+.spark-out { fill: none; stroke: #ffb454; stroke-width: 1.6; stroke-linejoin: round; }
+.legend { display: flex; gap: 16px; color: #8da2bd; font-size: 12px; margin-top: 8px; align-items: center; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 3px; margin-right: 6px; vertical-align: middle; border-radius: 2px; }
+.legend .in::before { background: #54a6ff; }
+.legend .out::before { background: #ffb454; }
+footer { color: #6f829c; font-size: 12px; margin-top: 22px; }
+</style>
+</head>
+<body>
+<header>
+<h1>netwatch</h1>
+<p class="subtitle">SNMPv2c network monitor</p>
+<p class="meta">Generated 2026-11-16 17:09:27 UTC &middot; refresh every 30 s &middot; 1 device(s), 1 reachable &middot; 3 interface(s) &middot; 9 sample(s) &middot; 1 active alert(s)</p>
+</header>
+<section id="alerts">
+<h2>Active alerts</h2>
+<table>
+<thead><tr><th>Severity</th><th>Kind</th><th>Target</th><th>Opened</th><th>Message</th></tr></thead>
+<tbody>
+<tr><td><span class="bad">critical</span></td><td>oper_status_down</td><td>simsw01.example / Ethernet0/3</td><td>2026-11-16 17:08:28 UTC</td><td>Ethernet0/3 (spare): oper status is down (expected up)</td></tr>
+</tbody>
+</table>
+</section>
+<section id="devices">
+<h2>Devices</h2>
+<table>
+<thead><tr><th>Device</th><th>Name</th><th>Status</th><th class="num">Interfaces</th><th>Last poll</th></tr></thead>
+<tbody>
+<tr><td data-device="simulator">simulator</td><td>simsw01.example</td><td><span class="ok">reachable</span></td><td class="num">3</td><td>2026-11-16 17:08:30 UTC</td></tr>
+</tbody>
+</table>
+</section>
+<section id="interfaces">
+<h2>Interfaces</h2>
+<table>
+<thead><tr><th>Device</th><th>Interface</th><th>Alias</th><th>Speed</th><th>Oper</th><th class="num">In</th><th class="num">Out</th><th class="num">Utilization</th><th>Traffic (recent samples)</th></tr></thead>
+<tbody>
+<tr data-device="simulator" data-if-index="1"><td>simulator</td><td>Ethernet0/1</td><td>uplink-core</td><td>1.00 Gbps</td><td><span class="ok">up</span></td><td class="num">188.85 Mbps</td><td class="num">127.63 Mbps</td><td class="num">18.9%</td><td><svg class="spark" viewBox="0 0 220 42" width="220" height="42" role="img" aria-label="traffic sparkline for simulator Ethernet0/1"><line class="spark-axis" x1="3" y1="39" x2="217" y2="39" /><polyline class="spark-in" points="3.0,4.1 217.0,3.0" /><polyline class="spark-out" points="3.0,15.1 217.0,14.7" /></svg></td></tr>
+<tr data-device="simulator" data-if-index="2"><td>simulator</td><td>Ethernet0/2</td><td>server-farm</td><td>1.00 Gbps</td><td><span class="ok">up</span></td><td class="num">387.32 Mbps</td><td class="num">289.40 Mbps</td><td class="num">38.7%</td><td><svg class="spark" viewBox="0 0 220 42" width="220" height="42" role="img" aria-label="traffic sparkline for simulator Ethernet0/2"><line class="spark-axis" x1="3" y1="39" x2="217" y2="39" /><polyline class="spark-in" points="3.0,3.0 217.0,3.2" /><polyline class="spark-out" points="3.0,11.6 217.0,12.2" /></svg></td></tr>
+<tr data-device="simulator" data-if-index="3"><td>simulator</td><td>Ethernet0/3</td><td>spare</td><td>100.00 Mbps</td><td><span class="bad">down</span></td><td class="num">0 bps</td><td class="num">0 bps</td><td class="num">0.0%</td><td><svg class="spark" viewBox="0 0 220 42" width="220" height="42" role="img" aria-label="traffic sparkline for simulator Ethernet0/3"><line class="spark-axis" x1="3" y1="39" x2="217" y2="39" /><polyline class="spark-in" points="3.0,39.0 217.0,39.0" /><polyline class="spark-out" points="3.0,39.0 217.0,39.0" /></svg></td></tr>
+</tbody>
+</table>
+<div class="legend"><span class="in">inbound</span><span class="out">outbound</span></div>
+</section>
+<footer>
+netwatch 1.0 &middot; utilization threshold 80.0% &middot; history retained by the SQLite store
+</footer>
+</body>
+</html>
